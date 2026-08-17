@@ -9,12 +9,36 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    private Stage primaryStage;
+    private Stage exitStage;
+
+    private Scene scene1;
+    private Scene scene2;
+    private Scene scene3;
+    private Scene scene4;
+    private Scene scene5;
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) {
+
+        this.primaryStage = primaryStage;
+
+        createMainMenu();
+        createPlayScreen();
+        createConfigurationsScreen();
+        createHighScoresScreen();
+        createExitScreen();
+
+        primaryStage.setScene(scene1);
+        primaryStage.setTitle("OOSD Assignment");
+        primaryStage.show();
+    }
+
+    private void createMainMenu() {
 
         Label label1 = new Label("Main menu");
 
@@ -37,7 +61,26 @@ public class Main extends Application {
                 button5
         );
 
-        Scene scene1 = new Scene(root1, 400, 300);
+        scene1 = new Scene(root1, 400, 300);
+
+        button2.setOnAction(e -> {
+            primaryStage.setScene(scene2);
+        });
+
+        button3.setOnAction(e -> {
+            primaryStage.setScene(scene3);
+        });
+
+        button4.setOnAction(e -> {
+            primaryStage.setScene(scene4);
+        });
+
+        button5.setOnAction(e -> {
+            exitStage.show();
+        });
+    }
+
+    private void createPlayScreen() {
 
         Label label2 = new Label("Play");
         Button backButton2 = new Button("Back");
@@ -45,8 +88,19 @@ public class Main extends Application {
         label2.setTranslateY(-30);
         backButton2.setTranslateY(30);
 
-        StackPane root2 = new StackPane(label2, backButton2);
-        Scene scene2 = new Scene(root2, 400, 300);
+        StackPane root2 = new StackPane(
+                label2,
+                backButton2
+        );
+
+        scene2 = new Scene(root2, 400, 300);
+
+        backButton2.setOnAction(e -> {
+            primaryStage.setScene(scene1);
+        });
+    }
+
+    private void createConfigurationsScreen() {
 
         Label label3 = new Label("Configurations");
         Button backButton3 = new Button("Back");
@@ -54,8 +108,19 @@ public class Main extends Application {
         label3.setTranslateY(-30);
         backButton3.setTranslateY(30);
 
-        StackPane root3 = new StackPane(label3, backButton3);
-        Scene scene3 = new Scene(root3, 400, 300);
+        StackPane root3 = new StackPane(
+                label3,
+                backButton3
+        );
+
+        scene3 = new Scene(root3, 400, 300);
+
+        backButton3.setOnAction(e -> {
+            primaryStage.setScene(scene1);
+        });
+    }
+
+    private void createHighScoresScreen() {
 
         Label label4 = new Label("High Scores");
         Button backButton4 = new Button("Back");
@@ -63,10 +128,22 @@ public class Main extends Application {
         label4.setTranslateY(-30);
         backButton4.setTranslateY(30);
 
-        StackPane root4 = new StackPane(label4, backButton4);
-        Scene scene4 = new Scene(root4, 400, 300);
+        StackPane root4 = new StackPane(
+                label4,
+                backButton4
+        );
 
-        Label label5 = new Label("Are you sure you want to quit playing?");
+        scene4 = new Scene(root4, 400, 300);
+
+        backButton4.setOnAction(e -> {
+            primaryStage.setScene(scene1);
+        });
+    }
+
+    private void createExitScreen() {
+
+        Label label5 =
+                new Label("Are you sure you want to quit playing?");
 
         Button backButton5 = new Button("No");
         Button closeButton5 = new Button("Yes");
@@ -85,39 +162,11 @@ public class Main extends Application {
                 closeButton5
         );
 
-        Scene scene5 = new Scene(root5, 300, 150);
+        scene5 = new Scene(root5, 300, 150);
 
-        Stage exitStage = new Stage();
+        exitStage = new Stage();
         exitStage.setScene(scene5);
         exitStage.setTitle("Exit");
-
-        button2.setOnAction(e -> {
-            primaryStage.setScene(scene2);
-        });
-
-        button3.setOnAction(e -> {
-            primaryStage.setScene(scene3);
-        });
-
-        button4.setOnAction(e -> {
-            primaryStage.setScene(scene4);
-        });
-
-        button5.setOnAction(e -> {
-            exitStage.show();
-        });
-
-        backButton2.setOnAction(e -> {
-            primaryStage.setScene(scene1);
-        });
-
-        backButton3.setOnAction(e -> {
-            primaryStage.setScene(scene1);
-        });
-
-        backButton4.setOnAction(e -> {
-            primaryStage.setScene(scene1);
-        });
 
         backButton5.setOnAction(e -> {
             exitStage.close();
@@ -127,9 +176,5 @@ public class Main extends Application {
             exitStage.close();
             primaryStage.close();
         });
-
-        primaryStage.setScene(scene1);
-        primaryStage.setTitle("OOSD Assignment");
-        primaryStage.show();
     }
 }
